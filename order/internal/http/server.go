@@ -9,8 +9,7 @@ import (
 )
 
 func NewServer(
-	userRepository userRepository,
-	authService authService,
+	orderRepository orderRepository,
 ) (*server, error) {
 	port, err := strconv.ParseInt(os.Getenv("SERVER_PORT"), 10, 64)
 	if err != nil {
@@ -20,9 +19,9 @@ func NewServer(
 	instance := echo.New()
 	instance.Server.Addr = fmt.Sprintf(":%d", port)
 
-	instance.Add("POST", "user/register", newWrapper(newRegisterHandler(userRepository)).Handle)
-	instance.Add("POST", "user/auth", newWrapper(newAuthHandler(userRepository, authService)).Handle)
-	instance.Add("GET", "user/info", newWrapper(newInfoHandler(userRepository, authService)).Handle)
+	instance.Add("POST", "order/create", newWrapper(newCreateHandler(orderRepository)).Handle)
+	instance.Add("POST", "order/process", newWrapper(newProcessHandler(orderRepository)).Handle)
+	instance.Add("GET", "order/:orderId", newWrapper(newGetHandler(orderRepository)).Handle)
 
 	return &server{
 		echo: instance,

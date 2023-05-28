@@ -24,17 +24,17 @@ type registerResponse struct {
 	Error string `json:"error,omitempty"`
 }
 
-func newRegisterHandler(userRegisterer userRepository) *registerHandler {
-	return &registerHandler{
-		userRegistrar: userRegisterer,
+func newRegisterHandler(userRepository userRepository) *userRegisterHandler {
+	return &userRegisterHandler{
+		userRepository: userRepository,
 	}
 }
 
-type registerHandler struct {
-	userRegistrar userRepository
+type userRegisterHandler struct {
+	userRepository userRepository
 }
 
-func (h *registerHandler) Handle(ctx echo.Context) error {
+func (h *userRegisterHandler) Handle(ctx echo.Context) error {
 	var request registerRequest
 	err := ctx.Bind(&request)
 	if err != nil {
@@ -50,7 +50,7 @@ func (h *registerHandler) Handle(ctx echo.Context) error {
 		return ctx.JSON(http.StatusBadRequest, registerResponse{Error: "incorrect role"})
 	}
 
-	err = h.userRegistrar.Add(
+	err = h.userRepository.Add(
 		request.Username,
 		request.Email,
 		request.Password,
@@ -63,11 +63,11 @@ func (h *registerHandler) Handle(ctx echo.Context) error {
 	return ctx.JSON(http.StatusOK, registerResponse{})
 }
 
-func (h *registerHandler) isCorrectEmail(email string) bool {
+func (h *userRegisterHandler) isCorrectEmail(email string) bool {
 	return strings.Contains(email, "@")
 }
 
-func (h *registerHandler) isCorrectRole(role string) bool {
+func (h *userRegisterHandler) isCorrectRole(role string) bool {
 	_, ok := roles[role]
 	return ok
 }

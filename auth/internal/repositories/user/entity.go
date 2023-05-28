@@ -3,7 +3,7 @@ package user
 import "time"
 
 type user struct {
-	Id           int64     // Id is automatically detected as primary key
+	Id           int64     // Id is automatically detected as primary key by orm
 	Username     string    `pg:"unique:username,notnull"`
 	Email        string    `pg:"unique:email,notnull"`
 	PasswordHash string    `pg:"notnull:password_hash"`

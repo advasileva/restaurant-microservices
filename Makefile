@@ -1,20 +1,20 @@
 include .env
-# BOT=bot
 AUTH_SERVER=auth
+ORDER_SERVER=order
 
 init:
-	# cd ${BOT} && go get .
-	cd ${AUTH_SERVER}/internal/http && go get .
+	cd ${AUTH_SERVER} && go get .
+	cd ${ORDER_SERVER} && go get .
 
-build.bot:
-	cd ${BOT} && docker build -t go-bot .
+build.auth:
+	cd ${AUTH_SERVER} && docker build -t auth-server .
 
-build.server:
-	cd ${AUTH_SERVER} && docker build -t go-server .
+build.order:
+	cd ${ORDER_SERVER} && docker build -t order-server .
 
 build:
-	# make build.bot
-	make build.server
+	make build.auth
+	make build.order
 
 update:
 	-docker-compose down

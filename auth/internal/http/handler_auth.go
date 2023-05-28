@@ -17,16 +17,16 @@ type authResponse struct {
 	Error string `json:"error,omitempty"`
 }
 
-func newAuthHandler(userAuthentificator userRepository, authService authService) *authHandler {
+func newAuthHandler(userRepository userRepository, authService authService) *authHandler {
 	return &authHandler{
-		userAuthentificator: userAuthentificator,
-		authService:         authService,
+		userRepository: userRepository,
+		authService:    authService,
 	}
 }
 
 type authHandler struct {
-	userAuthentificator userRepository
-	authService         authService
+	userRepository userRepository
+	authService    authService
 }
 
 func (h *authHandler) Handle(ctx echo.Context) error {
@@ -36,7 +36,7 @@ func (h *authHandler) Handle(ctx echo.Context) error {
 		return fmt.Errorf("cannot bind auth request: %v", err)
 	}
 
-	ok, err := h.userAuthentificator.CheckPasswordByEmail(request.Email, request.Password)
+	ok, err := h.userRepository.CheckPasswordByEmail(request.Email, request.Password)
 	if !ok {
 		return ctx.JSON(http.StatusUnauthorized, authResponse{Error: "incorrect password for email"})
 	}
