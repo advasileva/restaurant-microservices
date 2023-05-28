@@ -4,7 +4,7 @@ AUTH_SERVER=auth
 
 init:
 	# cd ${BOT} && go get .
-	cd ${AUTH_SERVER}/internal/repositories/user && go get .
+	cd ${AUTH_SERVER}/internal/http && go get .
 
 build.bot:
 	cd ${BOT} && docker build -t go-bot .

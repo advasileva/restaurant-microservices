@@ -1,5 +1,4 @@
-# restaurant-microservices
-Что-то зачем-то
+# Restaurant Microservices
 
 To run project:
 ```bash
