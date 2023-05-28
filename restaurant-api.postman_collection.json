@@ -1,0 +1,167 @@
+{
+	"info": {
+		"name": "restaurant-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/user/register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Username\": \"advasileva\",\n    \"Email\": \"alenadvasileva@yandex.ru\",\n    \"Password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/user/register?role=chef",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"register"
+					],
+					"query": [
+						{
+							"key": "role",
+							"value": "chef"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Email\": \"alenadvasileva@yandex.ru\",\n    \"Password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/user/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/user/info",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Authorization: Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2ODUzNzQxNjkuMTgwMjI3LCJpYXQiOjE2ODUyODc3NjkuMTgwMjMsImVtYWlsIjoiYWxlbmFkdmFzaWxldmFAeWFuZGV4LnJ1In0.idH5rmob1ayse0beNa7cBFSLwRrI5M-xNm1fP2dByiwlvE8vPw9hReUU_0Bsnh5AB4mQLsG90RBNW8T-wQWV4w",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/user/info",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"user",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/order/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"user_id\": 4,\n    \"status\": \"waiting\",\n    \"dishes\": [\n        {\n            \"name\": \"Carbonara\",\n            \"description\": \"Spaghetti with small pieces of guanciale or pancetta mixed with egg sauce, pecorino romano cheese, salt and freshly ground black pepper.\",\n            \"price\": 650,\n            \"quantity\": 1\n        },\n        {\n            \"name\": \"Orange fresh\",\n            \"description\": \"Fresh-squeezed orange juice.\",\n            \"price\": 300,\n            \"quantity\": 1\n        }\n    ],\n    \"special_requests\": \"nil\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/order/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"order",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/order/process",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/order/process",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"order",
+						"process"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/order/{orderId}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/order/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"order",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -2,9 +2,10 @@ package http
 
 import (
 	"fmt"
+	"net/http"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/gommon/log"
-	"net/http"
 )
 
 type processRequest struct{}
@@ -24,7 +25,7 @@ type processHandler struct {
 }
 
 func (h *processHandler) Handle(ctx echo.Context) error {
-	var request getRequest
+	var request processRequest
 	err := ctx.Bind(&request)
 	if err != nil {
 		return fmt.Errorf("cannot bind create request: %v", err)

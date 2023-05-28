@@ -2,10 +2,11 @@ package order
 
 import (
 	"fmt"
+	"server/internal/models"
+
 	"github.com/go-pg/pg/v10"
 	"github.com/go-pg/pg/v10/orm"
 	"github.com/labstack/gommon/log"
-	"server/internal/models"
 )
 
 func NewRepository(db *pg.DB) *repository {

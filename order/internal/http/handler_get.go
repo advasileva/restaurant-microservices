@@ -2,10 +2,11 @@ package http
 
 import (
 	"fmt"
-	"github.com/labstack/echo/v4"
 	"net/http"
 	"server/internal/models"
 	"strconv"
+
+	"github.com/labstack/echo/v4"
 )
 
 type getRequest struct{}
